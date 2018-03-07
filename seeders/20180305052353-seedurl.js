@@ -1,8 +1,12 @@
 const md5 = require('md5');
+const redis = require('redis');
 
+const client = redis.createClient();
+
+module.exports = client;
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    const longURLtemplate = '/thisisverylargeurl/';
+  up: (queryInterface) => {
+    const longURLtemplate = 'thisisverylargeurl';
     const shortURLSet = new Set();
     const longURLArr = [];
     let longURLInstance = '';
@@ -25,11 +29,11 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       };
+      client.hset('Urls', shortURLInstance, longURLInstance);
       longURLArr.push(urlObj);
     }
     return queryInterface.bulkInsert('Urls', longURLArr, {});
   },
-
-  down: (queryInterface, Sequelize) => queryInterface.bulkDelete('Urls', {}),
+  down: queryInterface => queryInterface.bulkDelete('Urls', {}),
 };
 
