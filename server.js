@@ -1,5 +1,6 @@
 const Hapi = require('hapi');
 const handler = require('./handler');
+const client = require('./redis');
 
 const server = new Hapi.Server();
 server.connection({
@@ -7,11 +8,8 @@ server.connection({
   port: 8000,
 });
 
-server.route(handler);
+server.route(handler(client));
 if (!module.parent) {
-  server.start((error) => {
-    if (error) { throw error; }
-    console.log('server started');
-  });
+  server.start();
 }
 module.exports = server;
