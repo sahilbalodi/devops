@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate && NODE_ENV=test jest --coverage --forceExit --runInBand",
+    "test": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate && NODE_ENV=test node_modules/.bin/jest --coverage --forceExit --runInBand",
     "start": "NODE_ENV=development sequelize db:migrate:undo:all && NODE_ENV=development sequelize db:migrate && NODE_ENV=development node server.js"
   },
   "author": "",
