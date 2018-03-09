@@ -18,7 +18,7 @@ jobs:
         environment:
         - POSTGRES_DB: database_urltest
         - POSTGRES_PASSWORD: ""
-        - POSTGRES_USER: postgres
+        - POSTGRES_USER: sahilbalodi
 
       - image: redis
       # Specify service dependencies here if necessary
